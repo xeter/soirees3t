@@ -1,4 +1,4 @@
-package fr.soat.springdata.jpa.dao.personnalisees.base;
+package fr.soat.springdata.jpa.dao.personnalisees.tous;
 
 import java.io.Serializable;
 
@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import fr.soat.springdata.jpa.entites.Personne;
-public class PersonneDaoBaseImpl{}
+public class PersonneDaoPersonnaliseeBaseImpl{}
 //public class PersonneDaoBaseImpl<T, ID extends Serializable> extends
 //		SimpleJpaRepository<T, ID> implements PersonneDaoBase<T, ID> {
 //	private EntityManager entityManager;

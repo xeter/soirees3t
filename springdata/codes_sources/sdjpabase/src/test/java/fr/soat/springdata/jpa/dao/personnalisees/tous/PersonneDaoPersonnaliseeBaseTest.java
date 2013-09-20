@@ -1,4 +1,4 @@
-package fr.soat.springdata.jpa.dao;
+package fr.soat.springdata.jpa.dao.personnalisees.tous;
 
 import junit.framework.Assert;
 
@@ -10,13 +10,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
-import fr.soat.springdata.jpa.dao.personnalisees.base.PersonneDaoBase;
+import fr.soat.springdata.jpa.dao.personnalisees.tous.PersonneDaoPersonnaliseeBase;
 import fr.soat.springdata.jpa.entites.Personne;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/applicationContext.xml")
 @TransactionConfiguration(transactionManager="transactionManager")
-public class PersonneDaoBaseTest {
+public class PersonneDaoPersonnaliseeBaseTest {
 //	@Autowired
 //	private PersonneDaoBase<Personne, Long> personneDaoBase;
 	private Personne personneSauvee;

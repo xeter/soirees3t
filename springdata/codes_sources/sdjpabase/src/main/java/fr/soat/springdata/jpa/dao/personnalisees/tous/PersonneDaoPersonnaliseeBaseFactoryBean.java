@@ -1,4 +1,4 @@
-package fr.soat.springdata.jpa.dao.personnalisees.base;
+package fr.soat.springdata.jpa.dao.personnalisees.tous;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 
-public class PersonneDaoBaseFactoryBean{}
+public class PersonneDaoPersonnaliseeBaseFactoryBean{}
 //public class PersonneDaoBaseFactoryBean<R extends JpaRepository<T, I>, T, I extends Serializable> 
 //	extends JpaRepositoryFactoryBean<R, T, I> {
 //	

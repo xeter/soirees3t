@@ -1,4 +1,4 @@
-package fr.soat.springdata.jpa.dao;
+package fr.soat.springdata.jpa.dao.personnalisees.supplementaire;
 
 import java.util.List;
 
@@ -12,17 +12,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
-import fr.soat.springdata.jpa.dao.personnalisees.complement.PersonneDaoPersonnaliseeRepository;
+import fr.soat.springdata.jpa.dao.personnalisees.supplementaire.PersonneDaoPersonnaliseeRepository;
 import fr.soat.springdata.jpa.entites.Personne;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager="transactionManager")
-@ContextConfiguration("classpath:/applicationContext.xml")
-public class DaoPersonnaliseesTest {
+@ContextConfiguration("classpath:applicationContext.xml")
+public class PersonneDaoPersonnaliseeRepositoryTest {
 	
-//	@Autowired
-//	private PersonneDaoPersonnaliseeRepository personneDaoPersonnaliseeRepository;
-//	private Personne personneSauvee;
+	@Autowired
+	private PersonneDaoPersonnaliseeRepository personneDaoPersonnaliseeRepository;
+	private Personne personneSauvee;
 
 	@Before
 	public void setUp() {
