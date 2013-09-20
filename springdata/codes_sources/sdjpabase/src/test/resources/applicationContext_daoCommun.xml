@@ -9,7 +9,8 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
 	<!-- Directory to scan for repository classes -->
-	<jpa:repositories base-package="fr.soat.springdata.jpa.dao" />
+	<jpa:repositories base-package="fr.soat.springdata.jpa.dao" 
+		factory-class="fr.soat.springdata.jpa.dao.personnalisees.tous.DaoCommunAuxAutresDaoFactoryBean"/>
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
