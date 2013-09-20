@@ -1,4 +1,4 @@
-package fr.soat.springdata.jpa;
+package fr.soat.springdata.jpa.dao;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package fr.soat.springdata.jpa;
+package fr.soat.springdata.jpa.helpers;
 
 import fr.soat.springdata.jpa.entites.Personne;
 import fr.soat.springdata.jpa.entites.Velo;

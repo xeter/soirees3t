@@ -1,4 +1,4 @@
-package fr.soat.springdata.jpa;
+package fr.soat.springdata.jpa.dao;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,7 +18,7 @@ import fr.soat.springdata.jpa.entites.Personne;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager="transactionManager")
 @ContextConfiguration("classpath:applicationContext.xml")
-public class PaginationTest {
+public class PersonnePaginationDaoTest {
 
 	private static final String NOM = "nom_";
 	private static final String PRENOM = "prenom_";

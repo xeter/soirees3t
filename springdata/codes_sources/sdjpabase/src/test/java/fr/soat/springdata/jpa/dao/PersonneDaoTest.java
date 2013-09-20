@@ -1,4 +1,4 @@
-package fr.soat.springdata.jpa;
+package fr.soat.springdata.jpa.dao;
 
 
 import org.junit.Assert;
@@ -12,11 +12,12 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import fr.soat.springdata.jpa.dao.PersonneDao;
 import fr.soat.springdata.jpa.entites.Personne;
+import fr.soat.springdata.jpa.helpers.PersonneDataHelper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager = "transactionManager")
 @ContextConfiguration("classpath:applicationContext.xml")
-public class SpringDataJPATest {
+public class PersonneDaoTest {
 	
 	@Autowired
 	private PersonneDao personneDao;
