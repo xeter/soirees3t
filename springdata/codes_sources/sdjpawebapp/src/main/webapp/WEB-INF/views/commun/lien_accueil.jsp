@@ -1,0 +1,1 @@
+<p><a href="/welcome/">&lt;&lt; Retour &agrave; l'accueil</a></p>

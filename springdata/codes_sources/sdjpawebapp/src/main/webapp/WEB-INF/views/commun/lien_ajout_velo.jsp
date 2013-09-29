@@ -1,0 +1,1 @@
+<p><a href="/welcome/ajout">+ Ajouter un v&eacute;lo</a></p>
