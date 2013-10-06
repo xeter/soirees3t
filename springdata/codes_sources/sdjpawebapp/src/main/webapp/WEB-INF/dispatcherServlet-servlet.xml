@@ -11,13 +11,19 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<import resource="applicationContext.xml" />
+
+	<!-- Pour permettre à Spring de convertir un String en objet métier -->
+	<mvc:annotation-driven conversion-service="conversionService" />
+	<bean class="org.springframework.data.repository.support.DomainClassConverter">
+		<constructor-arg ref="conversionService" />
+	</bean>
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"/>
 	
-	<mvc:annotation-driven />
 	<mvc:resources mapping="/images/**" location="/images/" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	
+
 	<context:component-scan base-package="fr.soat.springdata.jpa.sdjpawebapp.controller" />
-	
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:prefix="/WEB-INF/views/" p:suffix=".jsp" />

@@ -1,0 +1,1 @@
+<p><a href="/sdtouch/">&lt;&lt; Retour &agrave; l'accueil</a></p>

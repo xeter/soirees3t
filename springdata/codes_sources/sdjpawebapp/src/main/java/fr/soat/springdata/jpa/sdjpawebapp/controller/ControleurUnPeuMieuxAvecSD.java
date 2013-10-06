@@ -15,11 +15,11 @@ import fr.soat.springdata.jpa.sdjpawebapp.dao.VeloDao;
 import fr.soat.springdata.jpa.sdjpawebapp.entite.Velo;
 
 /**
- * Contrôleur sans l'intégration de Spring Data avec Spring MVC (du moins pas beaucoup).
+ * Contrôleur avec l'intégration de Spring Data avec Spring MVC.
  */
 @Controller
-@RequestMapping("/welcome/")
-public class HelloController {
+@RequestMapping("/sdtouch/")
+public class ControleurUnPeuMieuxAvecSD {
 
 	@Autowired
 	private VeloDao veloDao;
@@ -27,13 +27,13 @@ public class HelloController {
 	@RequestMapping(value="/{page}/{pageSize}", method = RequestMethod.GET)
 	public String printWelcome(final Model modele, @PathVariable("page") final int page, @PathVariable("pageSize") final int pageSize) {
 		metStockDansModele(modele, page, pageSize);
-		return "basique/hello";
+		return "sdtouch/hello";
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(final Model modele) {
 		metStockDansModele(modele, 0, 2);
-		return "basique/hello";
+		return "sdtouch/hello";
 	}
 
 	private void metStockDansModele(final Model modele, final int page,
@@ -53,7 +53,7 @@ public class HelloController {
 	public String ajoutVelo(final Model modele) {
 		modele.addAttribute("velo", new Velo());
 		modele.addAttribute("velosTrouves", this.veloDao.findAll());
-		return "basique/ajout";
+		return "sdtouch/ajout";
 	}
 
 	@RequestMapping("/sauv")
@@ -61,13 +61,12 @@ public class HelloController {
 		this.veloDao.save(velo);
 		modele.addAttribute("message", "Velo sauvegardé !");
 		modele.addAttribute("velosTrouves", this.veloDao.findAll());
-		return "basique/ajout";
+		return "sdtouch/ajout";
 	}
 
 	@RequestMapping("/voir/{id}")
-	public String voirVelo(@PathVariable("id") final Long id, final Model modele) {
-		Velo veloTrouve = this.veloDao.findOne(id);
+	public String voirVelo(@PathVariable("id") final Velo veloTrouve, final Model modele) {
 		modele.addAttribute("message", "Modèle de vélo : " + veloTrouve.getModele() + " (" + veloTrouve.getId() + ")");
-		return "basique/fiche";
+		return "sdtouch/fiche";
 	}
 }

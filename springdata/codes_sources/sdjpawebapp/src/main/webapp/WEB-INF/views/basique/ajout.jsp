@@ -4,7 +4,7 @@
 <html>
 	<title>Vente de v&eacute;los en ligne</title>
 <body>
-	<%@include file="/WEB-INF/views/commun/titre.jsp"%>
+	<%@include file="commun/titre.jsp"%>
 	<p>
 		<form:form method="post" modelAttribute="velo" action="/welcome/sauv">
 			Mod&egrave;le : <form:input id="id_modele" path="modele" type="text"/>
@@ -12,7 +12,7 @@
 		</form:form>
 	</p>
 	<p>${message}</p>
-	<%@include file="/WEB-INF/views/commun/stock.jsp"%>
-	<%@include file="/WEB-INF/views/commun/lien_accueil.jsp"%>
+	<%@include file="commun/stock.jsp"%>
+	<%@include file="commun/lien_accueil.jsp"%>
 </body>
 </html>
