@@ -4,26 +4,49 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
 
 	<import resource="applicationContext.xml" />
 
-	<!-- Pour permettre à Spring de convertir un String en objet métier -->
-	<mvc:annotation-driven conversion-service="conversionService" />
+
+	<!-- conversionService : pour permettre à Spring de convertir un String en objet métier (cf. documentation Spring Core) -->
+	<mvc:annotation-driven conversion-service="conversionService" >
+		<mvc:argument-resolvers>
+			<!-- Pour faciliter la pagination -->
+        	<bean class="org.springframework.data.web.PageableArgumentResolver" />
+    	</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+	
+	<!-- Nécessaire pour la conversion String (id) vers une entité récupéré par Spring Data (avec findOne()) -->
 	<bean class="org.springframework.data.repository.support.DomainClassConverter">
+		<!-- on va ajouter DomainClassConverter à la liste des converters de conversionService -->
 		<constructor-arg ref="conversionService" />
 	</bean>
-	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"/>
-	
-	<mvc:resources mapping="/images/**" location="/images/" />
-	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<bean id="conversionService"
+		class="org.springframework.context.support.ConversionServiceFactoryBean" />
+
+
+	<!-- Pour faciliter la pagination (ne fonctionne pas pour certaines versions de Spring, dont 3.2) -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="customArgumentResolvers">
+			<list>
+				<bean class="org.springframework.data.web.PageableArgumentResolver" />
+			</list>
+		</property>
+	</bean> -->
+
+
+	<mvc:resources mapping="/images/**" location="/images/" /><!-- pour le folklore -->
+	<mvc:resources mapping="/resources/**" location="/resources/" /><!-- pareil -->
 
 	<context:component-scan base-package="fr.soat.springdata.jpa.sdjpawebapp.controller" />
 
+	<!-- pour savoir quelle jsp appeler lorsqu'une méthode de contrôleur retourne un String -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:prefix="/WEB-INF/views/" p:suffix=".jsp" />

@@ -2,8 +2,8 @@ package fr.soat.springdata.jpa.sdjpawebapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefaults;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,29 +24,12 @@ public class ControleurUnPeuMieuxAvecSD {
 	@Autowired
 	private VeloDao veloDao;
 
-	@RequestMapping(value="/{page}/{pageSize}", method = RequestMethod.GET)
-	public String printWelcome(final Model modele, @PathVariable("page") final int page, @PathVariable("pageSize") final int pageSize) {
-		metStockDansModele(modele, page, pageSize);
-		return "sdtouch/hello";
-	}
-
 	@RequestMapping(method = RequestMethod.GET)
-	public String printWelcome(final Model modele) {
-		metStockDansModele(modele, 0, 2);
+	public String printWelcome(final Model modele, @PageableDefaults(pageNumber = 0, value = 2)final Pageable pageable) {
+		final Page<Velo> resultatRecherche = this.veloDao.findAll(pageable);
+		modele.addAttribute("velosTrouves", resultatRecherche.getContent());
+		modele.addAttribute("pagination", resultatRecherche);
 		return "sdtouch/hello";
-	}
-
-	private void metStockDansModele(final Model modele, final int page,
-			final int pageSize) {
-		Pageable pageable = new PageRequest(page, pageSize);
-
-		Page<Velo> resultat = this.veloDao.findAll(pageable);
-		int totalPages = (resultat.getTotalPages() - 1 >= 0 ) ? resultat.getTotalPages() - 1 : 0;
-
-		modele.addAttribute("velosTrouves", resultat.getContent());
-		modele.addAttribute("pagePrec", (page <= 0) ? 0 : resultat.getNumber() - 1);
-		modele.addAttribute("pageSuiv", (page >= totalPages) ? totalPages : resultat.getNumber() + 1);
-		modele.addAttribute("pageSize", pageSize);
 	}
 
 	@RequestMapping("/ajout")
