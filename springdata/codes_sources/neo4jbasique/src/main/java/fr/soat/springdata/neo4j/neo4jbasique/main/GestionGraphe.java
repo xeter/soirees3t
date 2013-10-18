@@ -25,7 +25,7 @@ public class GestionGraphe {
 	private Node acteur;
 	private ExecutionEngine engine;
 
-	public GestionGraphe(GraphDatabaseService graphDb) {
+	public GestionGraphe(final GraphDatabaseService graphDb) {
 		this.graphDb = graphDb;
 		this.engine = new ExecutionEngine(this.graphDb);
 	}
@@ -42,11 +42,11 @@ public class GestionGraphe {
 			noeudFilm.setProperty(Film.TITRE, "Rapide et pas content");
 			this.acteur.createRelationshipTo(noeudFilm, JOUE_DANS);
 
-			noeudFilm = this.graphDb.createNode();
+			noeudFilm = this.graphDb.createNode();// on utilise les noeuds
 			noeudFilm.setProperty(Film.TITRE, "Trop rapide et trop pas content");
 			this.acteur.createRelationshipTo(noeudFilm, JOUE_DANS);
-			
-			Film film = new Film(this.graphDb.createNode());
+
+			Film film = new Film(this.graphDb.createNode());// on utilise le bean Film
 			film.setTitre("Il faut sauver le soldat Ryan");
 			this.acteur.createRelationshipTo(film.getNoeud(), JOUE_DANS);
 
@@ -58,10 +58,11 @@ public class GestionGraphe {
 
 
 	public void afficheGraphe() {
+		System.out.println("Une façon d'afficher le graphe : avec un Traverser. Exemple :");
 		Traverser traverseurDeFilms = getTraverseursFilms();
 		for (Path path : traverseurDeFilms) {
 			if (path.length() == 0) {
-				System.out.println(path.endNode().getProperty("prenom") + 
+				System.out.println(path.endNode().getProperty("prenom") +
 						" " +
 						path.endNode().getProperty("nom") +
 						" a joué dans les films suivants :");
@@ -70,6 +71,7 @@ public class GestionGraphe {
 			}
 		}
 
+		System.out.println();
 		System.out.println("Autre façon d'afficher le graphe :");
 		for (Relationship film: this.acteur.getRelationships()) {
 			System.out.println(film.getEndNode().getProperty(Film.TITRE));
@@ -77,7 +79,7 @@ public class GestionGraphe {
 	}
 
 	private Traverser getTraverseursFilms() {
-		TraversalDescription td = 
+		TraversalDescription td =
 				Traversal.description().
 				breadthFirst().
 				relationships(JOUE_DANS).
@@ -87,13 +89,13 @@ public class GestionGraphe {
 
 	public void exempleCypher() {
 		System.out.println("Un exemple d'utilisation de Cyper, le langage de requêtage de Neo4j :");
-		String requete = 
+		String requete =
 				"start n=node("+this.acteur.getId()+") " +
 						"match n-[:JOUE_DANS]->films " +
 						"where films." + Film.TITRE + " =~ 'Trop.*' " +
 						"return n, n.nom, n.prenom, films." + Film.TITRE;
 		ExecutionResult result = this.engine.execute(requete);
-		
+
 		String rows = "";
 		for ( Map<String, Object> row : result) {
 			for ( Entry<String, Object> column : row.entrySet() ) {

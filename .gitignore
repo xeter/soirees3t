@@ -6,5 +6,11 @@
 /springdata/codes_sources/sdjpawebapp/target/*
 /springdata/codes_sources/neo4jbasique/.*
 /springdata/codes_sources/neo4jbasique/target/*
+/springdata/codes_sources/neo4jbasique/bdd_neo4j/*
 /springdata/codes_sources/sdneo4jwebapp/.*
 /springdata/codes_sources/sdneo4jwebapp/target/*
+/springdata/codes_sources/sdneo4jbase/.*
+/springdata/codes_sources/sdneo4jbase/target/*
+/springdata/codes_sources/sdneo4jbase/bdd_neo4j/*
+/springdata/codes_sources/sdneo4jbase/data/*
+

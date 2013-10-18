@@ -1,4 +1,4 @@
-package fr.soat.springdata.neo4j.sdneo4j.modele;
+package fr.soat.springdata.neo4j.sdneo4jbase.modele;
 
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
@@ -10,15 +10,14 @@ public class Film {
 	private Long idNoeud;
 	private String titre;
 
-	public Film(String titre) {
-		this.titre = titre;
+	public Film() {
 	}
 
 	public String getTitre() {
 		return this.titre;
 	}
 
-	public void setTitre(String titre) {
+	public void setTitre(final String titre) {
 		this.titre = titre;
 	}
 
@@ -26,7 +25,7 @@ public class Film {
 		return this.idNoeud;
 	}
 
-	public void setIdNoeud(Long idNoeud) {
+	public void setIdNoeud(final Long idNoeud) {
 		this.idNoeud = idNoeud;
 	}
 }

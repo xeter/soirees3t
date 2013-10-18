@@ -1,4 +1,4 @@
-package fr.soat.springdata.neo4j.sdneo4j.modele;
+package fr.soat.springdata.neo4j.sdneo4jbase.modele;
 
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;

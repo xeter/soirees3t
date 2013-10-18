@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:neo4j="http://www.springframework.org/schema/data/neo4j"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/neo4j
+		http://www.springframework.org/schema/data/neo4j/spring-neo4j.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<!-- Directory to scan for repository classes -->
+	<!-- <neo4j:repositories base-package="fr.soat.springdata.neo4j.sdneo4jbase.dao" 
+		/> <neo4j:config storeDirectory="data/graph.db"/> <context:spring-configured/> 
+		<context:annotation-config/> <context:component-scan base-package="fr.soat.springdata.neo4j.sdneo4jbase.modele" 
+		/> <tx:annotation-driven /> -->
+ 	
+ 	<!-- <context:annotation-config/> -->
+	<neo4j:repositories base-package="fr.soat.springdata.neo4j.sdneo4jbase.dao" />
+	<neo4j:config storeDirectory="data/bdd_neo4j" />
+
+</beans>

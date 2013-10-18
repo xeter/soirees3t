@@ -2,26 +2,30 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.soat.springdata.neo4j</groupId>
-	<artifactId>sdneo4jwebapp</artifactId>
+	<artifactId>sdneo4jbase</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<properties>
-		<spring.version>3.2.3.RELEASE</spring.version>
-	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-neo4j</artifactId>
-			<version>2.2.1.RELEASE</version>
+			<version>2.3.1.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-neo4j-aspects</artifactId>
+			<version>2.3.1.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+		<!-- Pour les tests -->
 		<dependency>
 			<groupId>org.springframework</groupId> <!-- Notamment pour avoir SpringJUnit4ClassRunner -->
 			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
+			<version>3.1.4.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -40,11 +44,6 @@
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.0.3.v20130506</version>
 			</plugin>
 		</plugins>
 	</build>
