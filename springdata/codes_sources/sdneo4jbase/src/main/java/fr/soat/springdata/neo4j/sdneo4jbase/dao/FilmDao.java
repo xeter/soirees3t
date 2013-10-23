@@ -5,5 +5,5 @@ import org.springframework.data.neo4j.repository.GraphRepository;
 import fr.soat.springdata.neo4j.sdneo4jbase.modele.Film;
 
 public interface FilmDao extends GraphRepository<Film> {
-	//findByTitre(String titre);
+	Iterable<Film> findByTitreContaining(String titre);
 }

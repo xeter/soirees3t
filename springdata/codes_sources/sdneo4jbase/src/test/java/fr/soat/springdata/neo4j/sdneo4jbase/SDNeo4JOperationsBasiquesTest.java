@@ -28,6 +28,8 @@ public class SDNeo4JOperationsBasiquesTest {
 
 	private Long identifiantVinDiesel;
 
+	private Long identifiantActeur2;
+
 	@Before
 	public void setup() {
 		this.filmDao.deleteAll();
@@ -41,9 +43,21 @@ public class SDNeo4JOperationsBasiquesTest {
 		vinDiesel.aJoueDans(leFilm("Il faut sauver le soldat Ryan"));
 		vinDiesel.aJoueDans(leFilm("Les Initiés"));
 
+		final Film multiFacial = leFilm("Multi-Facial");
+		vinDiesel.aRealise(multiFacial).en(1994);
+
+		Acteur acteur2 = new Acteur();
+		acteur2.setNom("nom");
+		acteur2.setPrenom("prenom");
+		acteur2.aJoueDans(multiFacial);
+
 		this.acteurDao.save(vinDiesel);
+		this.acteurDao.save(acteur2);
 
 		this.identifiantVinDiesel = vinDiesel.getIdNoeud();
+		this.identifiantActeur2 = acteur2.getIdNoeud();
+
+		System.out.println("");
 	}
 
 	@Test
@@ -81,6 +95,34 @@ public class SDNeo4JOperationsBasiquesTest {
 		TraversalDescription traversalDescription = Traversal.description().breadthFirst().evaluator(Evaluators.atDepth(1));
 		final Iterable<Film> filmsJouesParVinDiesel = this.filmDao.findAllByTraversal(vinDiesel, traversalDescription);
 		for (Film film : filmsJouesParVinDiesel) {
+			System.out.println(film.getTitre());
+		}
+	}
+
+	@Test
+	public void testRelation() {
+		final Acteur vinDiesel = this.acteurDao.findOne(this.identifiantVinDiesel);
+		System.out.println(this.identifiantActeur2);
+	}
+
+	/**
+	 * Test des méthodes-requêtes ("query methods")
+	 */
+	@Test
+	public void testMethodesRequetes() {
+		System.out.println("Films trouvés contenant le mot \"Il\" :");
+		final Iterable<Film> filmsTrouves = this.filmDao.findByTitreContaining("Il");
+		for (Film film : filmsTrouves) {
+			System.out.println(film.getTitre());
+		}
+	}
+
+	@Test
+	public void testAnnotationQueryDansDao() {
+		System.out.println("Tous les films réalisés par Vin Diesel :");
+		final Acteur vinDiesel = this.acteurDao.findOne(this.identifiantVinDiesel);
+		final Iterable<Film> filmsTrouves = this.acteurDao.recupereMoiTousLesFilmsRealisesPar(vinDiesel);
+		for (Film film : filmsTrouves) {
 			System.out.println(film.getTitre());
 		}
 	}

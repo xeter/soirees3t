@@ -8,7 +8,9 @@ import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.springframework.data.neo4j.annotation.RelatedToVia;
 import org.springframework.data.neo4j.support.index.IndexType;
+import org.springframework.transaction.annotation.Transactional;
 
 @NodeEntity
 public class Acteur {
@@ -24,7 +26,8 @@ public class Acteur {
 	@RelatedTo(direction=Direction.BOTH, type="ajouedans")
 	private Set<Film> films;
 
-	private Set<Film> realisations; //Ajouter une relation bean entre Acteur et Film
+	@RelatedToVia(type="aRealise")
+	private Set<Film> realisations;
 
 	public String getNom() {
 		return this.nom;
@@ -59,6 +62,18 @@ public class Acteur {
 			this.films = new HashSet<Film>();
 		}
 		this.films.add(film);
+	}
+
+	@Transactional
+	public Realisation aRealise(final Film film) {
+		if (this.realisations == null) {
+			this.realisations = new HashSet<Film>();
+		}
+		Realisation realisation = new Realisation();
+		realisation.setActeur(this);
+		realisation.setFilm(film);
+		this.realisations.add(film);
+		return realisation;
 	}
 
 	@Override
