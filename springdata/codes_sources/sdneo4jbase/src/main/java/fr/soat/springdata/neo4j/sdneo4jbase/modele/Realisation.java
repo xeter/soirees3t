@@ -3,12 +3,16 @@ package fr.soat.springdata.neo4j.sdneo4jbase.modele;
 import java.util.Calendar;
 
 import org.springframework.data.neo4j.annotation.EndNode;
+import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.RelationshipEntity;
 import org.springframework.data.neo4j.annotation.StartNode;
 
-@RelationshipEntity(type="realise")
+@RelationshipEntity(type="aRealise")
 public class Realisation {
-	//	@RelationshipType
+
+	@GraphId
+	private Long id;
+
 	private Calendar dateRealisation;
 
 	@StartNode

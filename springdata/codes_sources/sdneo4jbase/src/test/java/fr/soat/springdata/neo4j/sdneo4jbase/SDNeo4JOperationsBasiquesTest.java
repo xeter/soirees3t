@@ -28,8 +28,6 @@ public class SDNeo4JOperationsBasiquesTest {
 
 	private Long identifiantVinDiesel;
 
-	private Long identifiantActeur2;
-
 	@Before
 	public void setup() {
 		this.filmDao.deleteAll();
@@ -44,18 +42,12 @@ public class SDNeo4JOperationsBasiquesTest {
 		vinDiesel.aJoueDans(leFilm("Les Initiés"));
 
 		final Film multiFacial = leFilm("Multi-Facial");
+		this.filmDao.save(multiFacial);
 		vinDiesel.aRealise(multiFacial).en(1994);
 
-		Acteur acteur2 = new Acteur();
-		acteur2.setNom("nom");
-		acteur2.setPrenom("prenom");
-		acteur2.aJoueDans(multiFacial);
-
 		this.acteurDao.save(vinDiesel);
-		this.acteurDao.save(acteur2);
 
 		this.identifiantVinDiesel = vinDiesel.getIdNoeud();
-		this.identifiantActeur2 = acteur2.getIdNoeud();
 
 		System.out.println("");
 	}
@@ -73,7 +65,7 @@ public class SDNeo4JOperationsBasiquesTest {
 	@Test
 	public void testFindAllByPropertyValue() {
 
-		System.out.println("On récupère tous les films par propriété :");
+		System.out.println("On récupère tous les films dont le titre est \"Strays\" :");
 		final EndResult<Film> filmsTrouves = this.filmDao.findAllByPropertyValue("titre", "Strays");
 		for (Film film : filmsTrouves) {
 			System.out.println(film.getTitre());
@@ -83,7 +75,7 @@ public class SDNeo4JOperationsBasiquesTest {
 	@Test
 	public void testFindByPropertyValue() {
 
-		System.out.println("On récupère des films par propriété :");
+		System.out.println("On récupère le film dont le titre est \"Les Initiés\" :");
 		final Film filmTrouve = this.filmDao.findByPropertyValue("titre", "Les Initiés");
 		System.out.println(filmTrouve.getTitre());
 	}
@@ -91,18 +83,12 @@ public class SDNeo4JOperationsBasiquesTest {
 	@Test
 	public void testAffichageFilmsJoues() {
 		final Acteur vinDiesel = this.acteurDao.findOne(this.identifiantVinDiesel);
-		System.out.println(vinDiesel + " a joué dans les films suivants :");
+		System.out.println(vinDiesel + " a joué dans les films suivants (on teste la recherche avec un algorithme de parcours) :");
 		TraversalDescription traversalDescription = Traversal.description().breadthFirst().evaluator(Evaluators.atDepth(1));
 		final Iterable<Film> filmsJouesParVinDiesel = this.filmDao.findAllByTraversal(vinDiesel, traversalDescription);
 		for (Film film : filmsJouesParVinDiesel) {
 			System.out.println(film.getTitre());
 		}
-	}
-
-	@Test
-	public void testRelation() {
-		final Acteur vinDiesel = this.acteurDao.findOne(this.identifiantVinDiesel);
-		System.out.println(this.identifiantActeur2);
 	}
 
 	/**
@@ -117,6 +103,9 @@ public class SDNeo4JOperationsBasiquesTest {
 		}
 	}
 
+	/**
+	 * Test de l'annotation @Query dans les entités-relation
+	 */
 	@Test
 	public void testAnnotationQueryDansDao() {
 		System.out.println("Tous les films réalisés par Vin Diesel :");

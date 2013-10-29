@@ -7,6 +7,6 @@ import fr.soat.springdata.neo4j.sdneo4jbase.modele.Acteur;
 import fr.soat.springdata.neo4j.sdneo4jbase.modele.Film;
 
 public interface ActeurDao extends GraphRepository<Acteur> {
-	@Query("start acteur=node({0}) match (acteur)-[:realise]-> (film) return film")
+	@Query("start acteur=node({0}) match acteur-[:aRealise]->film return film")
 	Iterable<Film> recupereMoiTousLesFilmsRealisesPar(Acteur acteur);
 }

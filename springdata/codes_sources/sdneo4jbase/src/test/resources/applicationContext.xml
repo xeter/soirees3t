@@ -11,7 +11,6 @@
 		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
- 	<!-- <context:annotation-config/> -->
 	<!-- Directory to scan for repository classes -->
 	<neo4j:repositories base-package="fr.soat.springdata.neo4j.sdneo4jbase.dao" />
 	<neo4j:config storeDirectory="data/bdd_neo4j" />
