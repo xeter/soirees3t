@@ -13,4 +13,6 @@
 /springdata/codes_sources/sdneo4jbase/target/*
 /springdata/codes_sources/sdneo4jbase/bdd_neo4j/*
 /springdata/codes_sources/sdneo4jbase/data/*
+/springdata/codes_sources/sdrestws/.*
+/springdata/codes_sources/sdrestws/target/*
 
