@@ -15,4 +15,6 @@
 /springdata/codes_sources/sdneo4jbase/data/*
 /springdata/codes_sources/sdrestws/.*
 /springdata/codes_sources/sdrestws/target/*
+/springdata/codes_sources/proxylab/.*
+/springdata/codes_sources/proxylab/target/*
 
