@@ -1,5 +1,8 @@
 package fr.soat.springdata.jpa.dao;
 
+import java.util.List;
+
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -19,11 +22,13 @@ public interface RequetesPersonnaliseesDao extends CrudRepository<Personne, Long
 
 	public Personne findByVeloAndNom(Velo velo, String nom);
 
+	public List<Personne> findByNomStartingWith(String nom, Sort ordreTri);
+
 	public Personne maMethodeNommeeDeRechercheParNom(String nom);
-	
+
 	@Query("from Personne p where p.nom = ?1 and p.prenom = ?2") // on peut nommer les paramètres avec @Param
 	public Personne maRequêteAvecQueryDeRechercheParNomEtPrenom(String nom, String prenom);
-	
+
 	@Query("update Personne p set p.nom = :nom where p.id = :id")
 	@Modifying //rend obsolète le readOnly=true dans l'annotation de la classe
 	public int metAJourNom(@Param("nom")String nom, @Param("id") Long id);
